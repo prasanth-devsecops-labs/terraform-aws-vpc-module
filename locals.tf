@@ -22,10 +22,11 @@ locals {
     )
 
     az_names = slice(data.aws_availability_zones.available.names, 0, 2)
+    az_cidr_map = zipmap(local.az_names, var.public_subnet_cidrs)
 
     public_subnets = {
-        for index, az in local.az_names : az => {
-            cidr = var.public_subnet_cidrs[index]
+        for az, cidr in local.az_cidr_map : az => {
+            cidr = cidr
             tags = merge(
                 local.common_tags,
                 {
