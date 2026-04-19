@@ -102,4 +102,8 @@ resource "aws_route_table_association" "database" {
   route_table_id = aws_route_table.database.id
 }
 
-
+resource "aws_db_subnet_group" "roboshop" {
+  name       = "${var.project}-${var.environment}"
+  subnet_ids = [for subnet in aws_subnet.database : subnet.id]
+  tags = local.aws_db_subnet_group_final_tags
+}

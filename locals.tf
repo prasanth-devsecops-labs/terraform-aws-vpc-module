@@ -116,4 +116,11 @@ locals {
     }
   )
 
+  aws_db_subnet_group_final_tags = merge(
+    local.common_tags,
+    {
+        Name = "${var.project}-${var.environment}"
+    }
+  )
+
 }
