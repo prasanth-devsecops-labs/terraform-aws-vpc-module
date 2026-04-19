@@ -64,3 +64,7 @@ output "database_route_table_id" {
   description = "ID of the database route table."
   value       = aws_route_table.database.id
 }
+
+output "database_subnet_group_name" {
+    value = aws_db_subnet_group.roboshop.name
+}
